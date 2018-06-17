@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import PlSqlParser from './plsqlParser.vscode';
-import PLSQLSettings from './plsql.settings';
+import { PLSQLSettings } from './plsql.settings';
 
 export class PLSQLDocumentSymbolProvider implements vscode.DocumentSymbolProvider {
 

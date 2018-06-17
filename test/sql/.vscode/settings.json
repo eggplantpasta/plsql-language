@@ -1,0 +1,19 @@
+{
+	"plsql-language.connections": [
+		{
+			"database": "DEVELOP",
+			"username": "xyz",
+			"active": false
+		},
+		{
+			"database": "DEVELOP",
+			"username": "abc",
+			"active": true
+		},
+		{
+			"database": "TEST",
+			"username": "xyz"
+		}
+	],
+	"plsql-language.connection.activeInfos": "abc/undefined@DEVELOP"
+}

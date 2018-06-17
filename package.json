@@ -5,7 +5,7 @@
     "version": "1.3.4",
     "publisher": "xyz",
     "engines": {
-        "vscode": "^1.18.0"
+        "vscode": "^1.24.0"
     },
     "homepage": "https://github.com/zabel-xyz/plsql-language",
     "repository": {
@@ -100,8 +100,128 @@
                     "type": "string",
                     "default": "",
                     "description": "Define string to replace variable ${PLDOC_AUTHOR}"
+                },
+
+                "plsql-language.connections": {
+                    "type": "array",
+                    "title": "Connections",
+                    "default": [],
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "active": {
+                                "type": "boolean",
+                                "required": false,
+                                "description": "Define the active connection"
+                            },
+                            "name": {
+                                "type": "string",
+                                "required": false,
+                                "description": "Name of the connection (default is user@database)"
+                            },
+                            "database": {
+                                "type": "string",
+                                "required": true,
+                                "description": "Database name"
+                            },
+                            "username": {
+                                "type": "string",
+                                "required": true,
+                                "description": "User name"
+                            },
+                            "password": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "User password",
+                                "required": false
+                            },
+                            "schema": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Schema name",
+                                "required": false
+                            }
+                        }
+                    }
+                },
+                "plsql-language.connection.activeInfos": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Connection infos to be used in a task"
+                },
+                "plsql-language.connection.patternActiveInfos": {
+                    "type": "string",
+                    "default": "${username}/${password}@${database}",
+                    "description": "Pattern of connection infos to be used in a task"
                 }
             }
+        },
+
+        "viewsContainers": {
+            "activitybar": [{
+                "id": "PLSQLLanguage",
+                "icon": "resources/images/dark/database.png",
+                "title": "plsql-language"
+            }]
+        },
+
+        "views": {
+            "PLSQLLanguage": [{
+                "id": "treePLSQLLanguage",
+                "name": "PLSQL - Connections"
+            }]
+        },
+
+	    "commands": [{
+            "command": "treePLSQLLanguage.refresh",
+            "title": "Refresh",
+            "icon": {
+                "light": "resources/images/light/refresh.png",
+                "dark": "resources/images/dark/refresh.png"
+            }
+        },{
+            "command": "treePLSQLLanguage.settings",
+            "title": "Settings",
+            "icon": {
+                "light": "resources/images/light/settings.png",
+                "dark": "resources/images/dark/settings.png"
+            }
+        },{
+            "command": "treePLSQLLanguage.new",
+            "title": "New",
+            "icon": {
+                "light": "resources/images/light/new.png",
+                "dark": "resources/images/dark/new.png"
+            }
+        },{
+            "command": "treePLSQLLanguage.activateEntry",
+            "title": "Activate"
+        }],
+
+        "menus": {
+            "view/title": [{
+                "command": "treePLSQLLanguage.refresh",
+                "when": "view == treePLSQLLanguage",
+                "group": "navigation@1"
+            }, {
+                "command": "treePLSQLLanguage.new",
+                "when": "view == treePLSQLLanguage",
+                "group": "navigation@2"
+            },{
+                "command": "treePLSQLLanguage.settings",
+                "when": "view == treePLSQLLanguage",
+                "group": "navigation@3"
+            }],
+
+            "view/item/context": [{
+                "command": "treePLSQLLanguage.activateEntry",
+                "when": "view == treePLSQLLanguage && viewItem == plsqlLanguageConnection",
+                "group": "1_tree-navigation@1"
+            }]
         }
     },
     "scripts": {
@@ -111,14 +231,14 @@
     },
     "dependencies": {
         "glob": "7.1.2",
-        "json5": "0.5.1",
-        "dateformat": "3.0.2"
+        "json5": "1.0.1",
+        "dateformat": "3.0.3"
     },
     "devDependencies": {
-        "typescript": "2.5.3",
-        "vscode": "1.1.6",
-        "mocha": "4.0.1",
-        "@types/node": "7.0.12",
-        "@types/mocha": "2.2.44"
+        "typescript": "2.9.1",
+        "vscode": "1.1.18",
+        "mocha": "5.2.0",
+        "@types/node": "10.3.2",
+        "@types/mocha": "5.2.1"
     }
 }
